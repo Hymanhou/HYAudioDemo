@@ -2,6 +2,7 @@
 // Created by 侯塬 on 2018/10/25.
 //
 #include "native_audio.h"
+#include "wav.h"
 
 /*
  * Class:     com_hyman_audiodemo_NativeAudio
@@ -42,6 +43,9 @@ JNIEXPORT jboolean JNICALL Java_com_hyman_audiodemo_NativeAudio_nativeStartCaptu
     android_CloseAudioDevice(stream);
     fclose(fp);
     LOG("naviteStartCapture complete!");
+
+    writeWav(TEST_CAPTURE_FILE_PATH, "/sdcard/wav_test.wav", samples, 16, CHANNELS);
+
     return JNI_TRUE;
 }
 

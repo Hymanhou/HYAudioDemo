@@ -18,7 +18,8 @@ add_library( # Sets the name of the library.
 
              # Provides a relative path to your source file(s).
         src/main/cpp/opensl.c
-        src/main/cpp/navite_audio.c)
+        src/main/cpp/navite_audio.c
+        src/main/cpp/wav.c)
 
 include_directories(src/main/cpp/)
 

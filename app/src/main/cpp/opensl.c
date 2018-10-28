@@ -349,7 +349,7 @@ int android_AudioIn(OPENSL_STREAM *p, short *buff, int size)
 		if (index >= bufSamples)
 		{
 			waitThreadLock(p->inlock);
-			(*p->recorderBuffQueue)->Enqueue(p->recorderBuffQueue, inBuffer, bufSamples * sizeof(char));
+			(*p->recorderBuffQueue)->Enqueue(p->recorderBuffQueue, inBuffer, bufSamples * sizeof(short));
 			p->currentInputBuffer = (p->currentInputBuffer ? 0 : 1);
 			index = 0;
 			inBuffer = p->inputBuffer[p->currentInputBuffer];

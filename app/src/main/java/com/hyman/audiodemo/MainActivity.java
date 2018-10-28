@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClickStopTest(View v) {
         if (nativeAudio != null) {
             nativeAudio.stopTesting();
-            Toast.makeText(this, "Stop Testing !", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Stop Testing !", Toast.LENGTH_SHORT).show();
         }
     }
 }
