@@ -84,11 +84,11 @@ int writeWav(const char *pcmFile, const char *wavFile, int sampleRate, int bitPe
     wavHead.subChunk2Size = PCMSize;
     toLittleEndian(&(wavHead.subChunk2Size), sizeof(wavHead.subChunk2Size));
 
-    fwrite(&wavHead, sizeof(WAV_HEAD), 1, fpWAVE);
-    char buff[1024];
+    fwrite(&wavHead, 1, sizeof(WAV_HEAD), fpWAVE);
+    short buff[1024];
     int readLen = 0;
-    while ((readLen = fread(buff, 1, 1024, fpPCM)) > 0) {
-        fwrite(buff, 1, readLen, fpWAVE);
+    while ((readLen = fread(buff, 2, 1024, fpPCM)) > 0) {
+        fwrite(buff, 2, readLen, fpWAVE);
     }
 
     fclose(fpPCM);
