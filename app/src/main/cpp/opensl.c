@@ -233,8 +233,8 @@ OPENSL_STREAM* android_OpenAudioDevice(int sampleRate, int inChannels, int outCh
 
 	if ((p->outBufSamples = bufferFrames * outChannels) != 0)
 	{
-		if ((p->outputBuffer[0] = (short *) calloc(p->outBufSamples, sizeof(char))) == NULL ||
-			(p->outputBuffer[1] = (short *) calloc(p->outBufSamples, sizeof(char))) == NULL)
+		if ((p->outputBuffer[0] = (short *) calloc(p->outBufSamples, sizeof(short))) == NULL ||
+			(p->outputBuffer[1] = (short *) calloc(p->outBufSamples, sizeof(short))) == NULL)
 		{
 			android_CloseAudioDevice(p);
 			return NULL;
@@ -243,8 +243,8 @@ OPENSL_STREAM* android_OpenAudioDevice(int sampleRate, int inChannels, int outCh
 
 	if ((p->inBufSamples = bufferFrames * inChannels) != 0)
 	{
-		if ((p->inputBuffer[0] = (short *) calloc(p->inBufSamples, sizeof(char))) == NULL ||
-			(p->inputBuffer[1] = (short *) calloc(p->inBufSamples, sizeof(char))) == NULL)
+		if ((p->inputBuffer[0] = (short *) calloc(p->inBufSamples, sizeof(short))) == NULL ||
+			(p->inputBuffer[1] = (short *) calloc(p->inBufSamples, sizeof(short))) == NULL)
 		{
 			android_CloseAudioDevice(p);
 			return NULL;
@@ -340,7 +340,7 @@ void bqRecorderCallBack(SLAndroidSimpleBufferQueueItf bq, void *context)
 int android_AudioIn(OPENSL_STREAM *p, short *buff, int size)
 {
 	short *inBuffer;
-	int i, bufSamples = p->inBufSamples, index = p->currentInputIndex;
+	int i, bufSamples = p->inBufSamples, index = bufSamples;
 	if (p == NULL || bufSamples == 0) return 0;
 	
 	inBuffer = p->inputBuffer[p->currentInputBuffer];

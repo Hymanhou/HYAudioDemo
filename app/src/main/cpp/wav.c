@@ -53,7 +53,6 @@ int writeWav(const char *pcmFile, const char *wavFile, int sampleRate, int bitPe
 
     fseek(fpPCM, 0, SEEK_END);
     int PCMSize = ftell(fpPCM);
-    fseek(fpPCM, 0, 0);
 
     WAV_HEAD wavHead;
     memset(&wavHead, 0, sizeof(wavHead));
@@ -64,6 +63,7 @@ int writeWav(const char *pcmFile, const char *wavFile, int sampleRate, int bitPe
     memcpy(wavHead.format, "WAVE", 4);
 
     memcpy(wavHead.subChunk1ID, "fmt", 3);
+    wavHead.subChunk1ID[3] = 0x20;
     wavHead.subChunk1Size = 16;
     wavHead.audioFormat = 1;
     wavHead.numChannels = channels;
@@ -83,6 +83,8 @@ int writeWav(const char *pcmFile, const char *wavFile, int sampleRate, int bitPe
     memcpy(wavHead.subChunk2ID, "data", 4);
     wavHead.subChunk2Size = PCMSize;
     toLittleEndian(&(wavHead.subChunk2Size), sizeof(wavHead.subChunk2Size));
+
+    fseek(fpPCM, 0, 0);
 
     fwrite(&wavHead, 1, sizeof(WAV_HEAD), fpWAVE);
     short buff[1024];

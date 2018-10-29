@@ -44,7 +44,12 @@ JNIEXPORT jboolean JNICALL Java_com_hyman_audiodemo_NativeAudio_nativeStartCaptu
     fclose(fp);
     LOG("naviteStartCapture complete!");
 
-    writeWav(TEST_CAPTURE_FILE_PATH, "/sdcard/wav_test.wav", samples, 16, CHANNELS);
+    writeWav(TEST_CAPTURE_FILE_PATH, "/sdcard/wav_test.wav", SAMPLE_RATE, 16, CHANNELS);
+
+//    WAV_HEAD wav_head;
+//    FILE *fp1 = fopen("/sdcard/wav_test.wav", "rb");
+//    fread(&wav_head, sizeof(WAV_HEAD), 1, fp1);
+//    fclose(fp1);
 
     return JNI_TRUE;
 }
